@@ -48,7 +48,7 @@
 <div class="container">
 
   <h1>Privacy Policy</h1>
-  <p class="subtitle">App: <strong>Note Bag</strong> &nbsp;|&nbsp; Package: <code>com.promo.dreaming.noteplusapp</code> &nbsp;|&nbsp; Last updated: August 13, 2026</p>
+  <p class="subtitle">App: <strong>Note Bag</strong> &nbsp;|&nbsp; Package: <code>com.promo.dreaming.noteplusapp</code> &nbsp;|&nbsp; Last updated: August 15, 2026</p>
   <p class="subtitle">Want to delete your data? <a href="#delete-data">Jump to the Data Deletion section</a>.</p>
 
   <p>
@@ -107,6 +107,19 @@
           can recognize returning installs and understand our user base</td>
         <td><span class="badge badge-external">External (our server)</span></td>
       </tr>
+      <tr>
+        <td><strong>Advertising ID</strong></td>
+        <td>The App shows ads through Google AdMob, which reads your device's Android Advertising ID to
+          measure ad performance and to select which ads to show. This is separate from the anonymous install
+          identifier described below, and it is controlled by you in Android Settings — see Section 6</td>
+        <td><span class="badge badge-external">External (Google AdMob)</span></td>
+      </tr>
+      <tr>
+        <td><strong>Note content (Edit Note at Web)</strong></td>
+        <td>If you use the optional "Edit Note at Web" feature, your note content is encrypted on your device
+          and temporarily relayed through our server so you can continue editing it in a browser</td>
+        <td><span class="badge badge-external">External (encrypted, temporary)</span></td>
+      </tr>
     </tbody>
   </table>
 
@@ -127,7 +140,9 @@
   </p>
   <ul>
     <li>A randomly-generated device identifier — not your Android Advertising ID, not tied to your Google
-      account, and not derived from any hardware serial number. It resets if you uninstall and reinstall the App.</li>
+      account, and not derived from any hardware serial number. It resets if you uninstall and reinstall the App.
+      (Your Android Advertising ID <em>is</em> separately collected by Google AdMob for advertising — see
+      Section 6. It is never sent to our server and is never linked to this identifier.)</li>
     <li>Your device manufacturer and model</li>
     <li>Your app version</li>
     <li>Your country, detected from your SIM/network carrier or device locale settings — never from GPS or
@@ -139,35 +154,61 @@
     content are never included in this data — it is limited to the device metadata listed above.
   </p>
 
-  <h2 id="delete-data">4. Request Data Deletion</h2>
+  <h2>4. Edit Note at Web (End-to-End Encrypted)</h2>
+  <p>
+    The App includes an optional <strong>"Edit Note at Web"</strong> feature that lets you continue editing a
+    note from a computer browser. This feature is <strong>end-to-end encrypted</strong> and works as follows:
+  </p>
+  <ul>
+    <li>When you choose to edit a note on the web, your device generates a random encryption key and displays
+      it, along with a one-time session ID, inside a QR code shown on our web page.</li>
+    <li>Your note content is encrypted (AES-256-GCM) <strong>on your device</strong> before it is sent. Our
+      server only ever receives and stores the encrypted, unreadable version.</li>
+    <li>The encryption key never touches our server — it exists only in the QR code and inside your device and
+      browser for the duration of the session.</li>
+    <li>When you finish editing, the encrypted session data is deleted from our server. If a session is
+      abandoned without being finished, it is automatically purged after a short retention period.</li>
+  </ul>
+  <p>
+    Because we never have access to the encryption key, <strong>we cannot read your note content</strong> at
+    any point during this process — our server only ever relays an encrypted payload it cannot decrypt.
+  </p>
+
+  <h2 id="delete-data">5. Request Data Deletion</h2>
   <p>
     <strong>Note Bag</strong> (developed by pritom.app@gmail.com, package <code>com.promo.dreaming.noteplusapp</code>) gives
     you full control over your data:
   </p>
   <ul>
     <li>
-      <strong>Note content</strong> — Since all notes, tasks, alarms, and attachments are stored only on your
-      device, simply uninstall the App or clear its storage (Android Settings → Apps → Note Bag → Clear Data /
-      Uninstall) to permanently delete this data. We never receive a copy of it, so there is nothing for us to
-      delete on our end.
+      <strong>Note content</strong> — All notes, tasks, alarms, and attachments are stored only on your
+      device; simply uninstall the App or clear its storage (Android Settings → Apps → Note Bag → Clear Data /
+      Uninstall) to permanently delete this data. We never receive a readable copy of it, so there is nothing
+      for us to delete on our end. If you used the "Edit Note at Web" feature (Section 4), the encrypted,
+      unreadable session data is deleted automatically when you finish editing, or shortly after if abandoned.
     </li>
     <li>
       <strong>Anonymous device registration record</strong> (device ID, device model, app version, country —
       see Section 3) — To request that we delete this record from our server, email us at
-      <a href="mailto:pritom.app@gmail.com?subject=Note%2B%20Data%20Deletion%20Request">pritom.app@gmail.com</a>
+      <a href="mailto:pritom.app@gmail.com?subject=Note%20Bag%20Data%20Deletion%20Request">pritom.app@gmail.com</a>
       with the subject "Note Bag Data Deletion Request". Include your device model and approximate
       install/registration date so we can locate the correct record. We will delete it within 30 days of a
       verified request.
     </li>
   </ul>
 
-  <h2>5. Third-Party Services</h2>
+  <h2>6. Third-Party Services</h2>
   <p>The App integrates the following third-party services that may collect data under their own policies:</p>
   <ul>
     <li>
-      <strong>Google AdMob</strong> — Displays advertisements. AdMob may collect device identifiers and
-      usage data to serve relevant ads. See:
-      <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>
+      <strong>Google AdMob</strong> — Displays advertisements. AdMob collects your Android Advertising ID
+      along with device and ad-interaction data in order to select ads, measure their performance, and detect
+      invalid activity. Ads shown in the App may be <strong>personalized</strong>, meaning Google may use this
+      data to choose ads based on your interests. We never send your notes, tasks, attachments, or the
+      identifier described in Section 3 to AdMob. See:
+      <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a> and
+      <a href="https://support.google.com/admob/answer/6128543" target="_blank">how Google uses data from
+      apps that use its services</a>
     </li>
     <li>
       <strong>Firebase (Google)</strong> — Used for push notifications (FCM) only.
@@ -178,44 +219,60 @@
     </li>
   </ul>
 
-  <h2>6. Permissions We Do NOT Abuse</h2>
+  <p><strong>Your advertising choices.</strong> You control the Advertising ID from your device, and these
+    settings apply to Note Bag along with every other app:</p>
+  <ul>
+    <li><strong>Opt out of personalized ads</strong> — Android Settings → Privacy → Ads → "Opt out of Ads
+      Personalization". You will still see ads, but they will not be selected based on your interests.</li>
+    <li><strong>Reset or delete your Advertising ID</strong> — the same Settings screen. Deleting it stops
+      apps, including this one, from receiving the identifier at all.</li>
+  </ul>
+  <p>
+    If you are in the European Economic Area, the United Kingdom, or Switzerland, applicable law requires your
+    consent before personalized ads are shown. Where consent is required, it is collected through Google's
+    consent mechanism, and you may withdraw it at any time using the device settings above.
+  </p>
+
+  <h2>7. Permissions We Do NOT Abuse</h2>
   <ul>
     <li>Contact data is <strong>never uploaded</strong> to any server — it stays in your note locally.</li>
     <li>Audio recordings are <strong>never transmitted</strong> — stored only in your note's private app storage.</li>
     <li>Camera photos are <strong>never shared</strong> outside the app without your action.</li>
   </ul>
 
-  <h2>7. Children's Privacy</h2>
+  <h2>8. Children's Privacy</h2>
   <p>
     The App is not directed to children under the age of 13. We do not knowingly collect personal information
     from children. If you believe a child has provided information through this app, please contact us.
   </p>
 
-  <h2>8. Data Security</h2>
+  <h2>9. Data Security</h2>
   <p>
     Your note data is stored in an encrypted SQLite database on your device. We implement reasonable technical
     measures to protect your data. However, no method of storage is 100% secure, and we cannot guarantee
     absolute security.
   </p>
 
-  <h2>9. Your Rights</h2>
+  <h2>10. Your Rights</h2>
   <p>Since all note content is stored locally on your device, you have full control:</p>
   <ul>
     <li><strong>Delete data</strong> — Clear app data via Android Settings → Apps → Note Bag → Clear Data</li>
     <li><strong>Revoke permissions</strong> — Via Android Settings → Apps → Note Bag → Permissions</li>
     <li><strong>Delete the app</strong> — Uninstalling removes all locally stored data</li>
-    <li><strong>Delete your device registration record</strong> — See Section 4 above for how to request this.</li>
+    <li><strong>Delete your device registration record</strong> — See Section 5 above for how to request this.</li>
   </ul>
 
-  <h2>10. Changes to This Policy</h2>
+  <h2>11. Changes to This Policy</h2>
   <p>
     We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated
     date. Continued use of the App after changes constitutes acceptance of the new policy.
   </p>
 
-  <h2>11. Contact Us</h2>
+  <h2>12. Contact Us</h2>
   <p>
-    If you have any questions or concerns about this Privacy Policy, please contact us at:<br />
+    If you have any questions or concerns about this Privacy Policy — including requests to delete your data
+    (see Section 5) — please contact us at:<br />
+    <strong>Email:</strong> <a href="mailto:pritom.app@gmail.com?subject=Note%20Bag%20Privacy%20Enquiry">pritom.app@gmail.com</a><br />
     <strong>GitHub:</strong> <a href="https://github.com/pritomkucse" target="_blank">github.com/pritomkucse</a>
   </p>
 
